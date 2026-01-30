@@ -1,0 +1,33 @@
+name: Sedstart QA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sedstart-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger SedStart test run
+        uses: sedstart/runcloud@v1
+        with:
+          api_key: \${{ secrets.SEDSTART_API_KEY_QA }}
+          project_id: 270
+          test_id: 1186
+          profile_id: 330
+          browser: chrome
+          headless: false
+        # The data type of the input
+        type: string
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  greet:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: Send greeting
+      run: echo "Hello ${{ inputs.name }}"
